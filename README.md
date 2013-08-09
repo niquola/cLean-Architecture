@@ -13,6 +13,7 @@ Academic architectural experiments.
 
 * use_cases - use cases in code
 * interactions - atoms for use cases 
+* messaging -  outgoing messages
 * domain - models for use cases implementation
 * web_ui - rails frontend
 

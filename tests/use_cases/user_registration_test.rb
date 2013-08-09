@@ -10,23 +10,49 @@ describe UserRegistrationUseCase do
     @user_administration ||= UserAdministrationUseCase.new('admin')
   end
 
+  def auth
+    @auth ||= UserAuthenticationUseCase.new('admin')
+  end
+
   it "must respond positively" do
-    result = registration.register(login:'oleg@com.com',
-                      password: 'pass1',
-                      password_confirmation: 'pass1')
+    registration
+    .register(login:'oleg@com.com',
+	      password: 'pass1',
+	      password_confirmation: 'pass1')
+    .tap do |result|
+      assert { result.ok? == true }
+    end
 
-    assert { result.ok? == true }
+    user_administration
+    .users(filter: :awaiting_confirmation)
+    .find{|u| u.login == 'oleg@com.com' }
+    .tap do |oleg|
+      assert { oleg != nil }
+    end
 
-    users = user_administration.users(filter: :awaiting_confirmation)
-    oleg = users.find{|u| u.login == 'oleg@com.com' }
+    confirmaton = registration
+    .confirmaton_for('oleg@com.com')
 
-    assert { oleg != nil }
+    registration
+    .confirm(key: confirmaton.key)
 
-    confirmaton = registration.confirmaton_for('oleg@com.com')
 
-    registration.confirm(key: confirmaton.key)
+    auth
+    .authenticate(login: 'oleg@com.com', password: 'pass1')
+    .tap do |session_key|
+      session =  auth.session(session_key)
+      assert { session.identity != nil }
+      auth.close_session(session_key)
 
-    oleg = user_administration.users(filter: :active).find{|u| u.login == 'oleg@com.com'}
-    assert { oleg != nil }
+      assert { auth.session(session_key) == nil }
+    end
+
+
+    user_administration
+    .users(filter: :active)
+    .find{|u| u.login == 'oleg@com.com'}
+    .tap do |oleg|
+      assert { oleg != nil }
+    end
   end
 end

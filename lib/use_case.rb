@@ -1,3 +1,5 @@
+require 'active_support/inflector'
+
 module UseCase
   def command(name, &bloc)
     if block_given?
