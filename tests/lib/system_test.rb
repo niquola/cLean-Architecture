@@ -1,3 +1,4 @@
+require 'ostruct'
 require_relative '../test_helper'
 
 describe 'System' do
