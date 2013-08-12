@@ -39,18 +39,18 @@ Rails problems:
 
 IDEAS:
 
-1) UseCase Layer gathering application behavior.
-2) Map use cases directly into code artifacts.
-3) Consolidate inter use case dependencies in specs.
-4) Prototype using simple use case implementation to get feedback as soon as possible.
-5) Use Cases is ÑÑÐ»Ð¾Ð²Ð¸Ñ Ð·Ð°Ð´Ð°ÑÐ¸ Ð° Ð¼Ð¾Ð´ÐµÐ»Ð¸ ÑÑÐ¾ ÑÐµÑÐµÐ½Ð¸Ñ
-5) Models should implement use cases
-6) Models can be refactored toward Deeper Insight under guard of use cases tests.
+1. UseCase Layer gathering application behavior.
+2. Map use cases directly into code artifacts.
+3. Consolidate inter use case dependencies in specs.
+4. Prototype using simple use case implementation to get feedback as soon as possible.
+5. Use Cases is testable only by use cases (as black box)
+5. Responsibility of Models just to implement use cases and dependencies between them.
+6. Models can be refactored toward Deeper Insight under guard of use cases tests.
 
 Arguments:
 
 * BDD (duck typing) - behavior is matter - what the system does is more important than how the system does it
-* Red - Green - Refactor (Design - Implement - Refactor)
+* Red - Green - Refactor: Design Use Cases -> KISS implementation -> Refactor to deep insight (when requirements is clear)
 * Lean - do hard thinks as late as possible
 * See what is your application (do u go into interface to understand what app do?)
 * wrong model refactoring pain
