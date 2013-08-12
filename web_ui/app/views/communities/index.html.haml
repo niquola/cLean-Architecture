@@ -1,0 +1,9 @@
+.page-header
+  %h1
+    Communities
+    = link_to 'Create new one', {action: 'new'}, class: 'btn'
+%ul
+  -@communities.each do |community|
+    %li= link_to community.title,
+      action: 'show',
+      id: community.id

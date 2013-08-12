@@ -4,8 +4,13 @@ class CommunitiesController < ApplicationController
   end
 
   def create
-    use_case.c(:create, params[:community])
-    redirect_to(action: 'index')
+    @community = use_case.c(:create, params[:community])
+
+    if @community.valid?
+      redirect_to(action: 'index')
+    else
+      render action: 'new'
+    end
   end
 
   def show
