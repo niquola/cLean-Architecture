@@ -10,7 +10,7 @@ class CommunityRepository
 
     def create(attrs)
       Community.new(attrs.merge(id: SecureRandom.uuid)).tap do |comm|
-	all<< comm 
+	all<< comm
       end
     end
   end

@@ -22,12 +22,11 @@ describe 'cross testing' do
 	 technologies: ['ruby', 'ruby on rails'])
 
     assert {
-      uc
-      .q(:list, filter: 'all')
+      uc.q(:list, filter: 'all')
       .find{|c| c.title == 'SPRUG'} != nil
     }
 
-    sprug = uc.find(community.id)
+    sprug = uc.q(:find, id: community.id)
 
     assert {
       sprug != nil
